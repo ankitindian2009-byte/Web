@@ -1,0 +1,2610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELOX — Beyond Velocity. Beyond Limit.</title>
+    <meta name="description" content="VELOX Automobiles. Handcrafted hypercars born from obsession. The VELOX Phantom — 1,340 BHP. 2.1 seconds. 380 km/h.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <style>
+        /* ─────────────────────────────────────────
+           DESIGN SYSTEM — VELOX LUXURY AUTOMOTIVE
+           Matte black · Titanium · Champagne (2–5%)
+        ───────────────────────────────────────── */
+        :root {
+            /* Surfaces */
+            --black:            #050505;
+            --carbon:           #0D1117;
+            --graphite:         #171A1F;
+            --surface:          #171A1F;
+            --surface-mid:      #1C2026;
+            --surface-hi:       #242830;
+            --card:             #1C2026;
+
+            /* Primary accent — Titanium Silver */
+            --titanium:         #C8CDD5;
+            --titanium-dim:     #8A9099;
+            --titanium-muted:   rgba(200,205,213,0.08);
+            --titanium-light:   #D8DCE2;
+            --silver:           #C8CDD5;
+            --white:            #F5F5F5;
+
+            /* Luxury accent — Champagne Gold (sparingly) */
+            --gold:             #D6B46B;
+            --gold-bright:      #E2C47E;
+            --gold-dim:         #A89258;
+            --gold-muted:       rgba(214,180,107,0.05);
+            --gold-border:      rgba(214,180,107,0.18);
+            --gold-glow:        rgba(214,180,107,0.06);
+
+            /* Interactive accent — Ice Blue */
+            --ice:              #6EC9F7;
+            --ice-dim:          rgba(110,201,247,0.35);
+            --ice-muted:        rgba(110,201,247,0.07);
+            --ice-glow:         rgba(110,201,247,0.12);
+
+            /* Semantic */
+            --success:          #0E7A63;
+            --error:            #7A1E28;
+            --crimson:          #7A1E28;
+            --crimson-bright:   #9A2835;
+
+            /* Model accents — restrained metallics */
+            --electric:         #6B7280;
+            --electric-bright:  #8A9099;
+
+            /* Typography */
+            --text-primary:     #F5F5F5;
+            --text-secondary: #B5BBC4;
+            --text-muted:       #6B7280;
+
+            /* Borders & glass */
+            --border:           rgba(255,255,255,0.08);
+            --border-subtle:    rgba(255,255,255,0.05);
+            --glass-bg:         rgba(23,26,31,0.72);
+            --glass-hover:      rgba(28,32,38,0.82);
+            --glass-border:     rgba(255,255,255,0.06);
+
+            /* Shadows & lighting */
+            --shadow-soft:      0 4px 28px rgba(0,0,0,0.45);
+            --shadow-elevated:  0 12px 48px rgba(0,0,0,0.55);
+            --shadow-edge:      inset 0 1px 0 rgba(255,255,255,0.05);
+            --shadow-edge-deep: inset 0 -1px 0 rgba(0,0,0,0.3);
+            --metal-gradient:   linear-gradient(180deg, #2A2F38 0%, #1C2026 45%, #171A1F 100%);
+            --metal-gradient-hover: linear-gradient(180deg, #323842 0%, #242830 45%, #1C2026 100%);
+
+            /* Type rhythm */
+            --tracking-tight:   -0.025em;
+            --tracking-normal:  0.04em;
+            --tracking-wide:    0.14em;
+            --tracking-wider:   0.22em;
+            --leading-tight:    1.05;
+            --leading-body:     1.8;
+            --leading-relaxed:  1.9;
+
+            --transition:       cubic-bezier(0.25,0.46,0.45,0.94);
+            --transition-sharp: cubic-bezier(0.4,0,0.2,1);
+            --card-radius:      0px;
+            --section-pad:      120px;
+        }
+
+        /* ─── RESET & BASE ─── */
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: 16px;
+        }
+        body {
+            font-family: 'Outfit', system-ui, sans-serif;
+            background: var(--black);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            min-height: 100vh;
+            cursor: default;
+            line-height: var(--leading-body);
+            letter-spacing: var(--tracking-normal);
+        }
+
+        /* ─── CINEMATIC ATMOSPHERIC BACKGROUND ─── */
+        #ambientBg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .ambient-mesh {
+            position: absolute;
+            inset: -30%;
+            background:
+                radial-gradient(ellipse 55% 45% at 18% 22%, rgba(200,205,213,0.04) 0%, transparent 55%),
+                radial-gradient(ellipse 50% 40% at 82% 68%, rgba(110,201,247,0.025) 0%, transparent 50%),
+                radial-gradient(ellipse 70% 50% at 50% 100%, rgba(13,17,23,0.9) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 35% at 65% 15%, rgba(214,180,107,0.02) 0%, transparent 45%);
+            animation: ambientMeshDrift 48s ease-in-out infinite alternate;
+        }
+        @keyframes ambientMeshDrift {
+            0%   { transform: translate(0, 0) scale(1); }
+            50%  { transform: translate(2%, -1.5%) scale(1.03); }
+            100% { transform: translate(-1.5%, 2%) scale(1.01); }
+        }
+        .ambient-streaks {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(105deg, transparent 38%, rgba(200,205,213,0.012) 49%, rgba(255,255,255,0.02) 50%, rgba(200,205,213,0.012) 51%, transparent 62%),
+                linear-gradient(75deg, transparent 58%, rgba(110,201,247,0.008) 68%, transparent 78%);
+            animation: ambientStreaks 36s linear infinite;
+        }
+        @keyframes ambientStreaks {
+            0%   { transform: translateX(-8%) translateY(0); opacity: 0.6; }
+            50%  { opacity: 1; }
+            100% { transform: translateX(8%) translateY(-2%); opacity: 0.6; }
+        }
+        .ambient-fog {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 100% 60% at 50% 110%, rgba(5,5,5,0.85) 0%, transparent 55%),
+                radial-gradient(ellipse 80% 40% at 0% 50%, rgba(13,17,23,0.5) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 40% at 100% 30%, rgba(13,17,23,0.4) 0%, transparent 50%);
+            animation: ambientFog 40s ease-in-out infinite alternate;
+        }
+        @keyframes ambientFog {
+            0%   { opacity: 0.85; }
+            100% { opacity: 1; }
+        }
+        .ambient-noise {
+            position: absolute;
+            inset: 0;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 180px 180px;
+        }
+
+        /* ─── CUSTOM CURSOR ─── */
+        #customCursor {
+            position: fixed;
+            z-index: 99999;
+            pointer-events: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(110,201,247,0.55);
+            box-shadow: 0 0 16px rgba(110,201,247,0.25);
+            transform: translate(-50%,-50%);
+            transition: width 0.3s, height 0.3s, background 0.3s, box-shadow 0.3s;
+            will-change: left, top;
+        }
+        #customCursor.expanded {
+            width: 44px;
+            height: 44px;
+            background: rgba(110,201,247,0.12);
+            border: 1px solid rgba(110,201,247,0.25);
+            box-shadow: 0 0 24px rgba(110,201,247,0.15);
+        }
+        @media (max-width:768px) { #customCursor { display:none; } html,body { cursor:auto; } }
+
+        /* ─── SCROLL PROGRESS ─── */
+        #scrollProgress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 1px;
+            z-index: 99998;
+            background: linear-gradient(90deg, transparent, var(--titanium-dim), var(--titanium), var(--titanium-dim), transparent);
+            border-radius: 0;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 8px rgba(200,205,213,0.15);
+            pointer-events: none;
+        }
+
+        /* ─── PARTICLE CANVAS ─── */
+        #particlesCanvas {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.35;
+        }
+
+        /* ─── CINEMATIC PRELOADER (hypercar ignition intro, ~1.6s) ─── */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            background: var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        #preloader.hidden { display: none; }
+
+        /* faint carbon-weave grain so the black screen isn't flat */
+        #preloader::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: repeating-linear-gradient(115deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 3px);
+            z-index: 1;
+        }
+
+        /* engine ignition glow — the spark that kicks off the sequence */
+        .pre-ignition-glow {
+            position: absolute;
+            width: 60vmax; height: 60vmax;
+            left: 50%; top: 50%;
+            transform: translate(-50%,-50%) scale(0.15);
+            background: radial-gradient(circle, rgba(200,205,213,0.18) 0%, rgba(110,201,247,0.06) 30%, rgba(13,17,23,0.08) 55%, transparent 72%);
+            filter: blur(6px);
+            opacity: 0;
+            z-index: 1;
+            animation: ignitionBurst 1.6s cubic-bezier(0.16,0.84,0.32,1) forwards;
+        }
+        @keyframes ignitionBurst {
+            0%   { transform: translate(-50%,-50%) scale(0.15); opacity: 0; }
+            10%  { opacity: 0.9; }
+            22%  { transform: translate(-50%,-50%) scale(1);    opacity: 0.75; }
+            45%  { transform: translate(-50%,-50%) scale(1.15); opacity: 0.45; }
+            78%  { transform: translate(-50%,-50%) scale(1.3);  opacity: 0.28; }
+            100% { transform: translate(-50%,-50%) scale(1.6);  opacity: 0; }
+        }
+
+        /* moving metallic reflection sweeping across the frame */
+        .pre-metallic-sheen {
+            position: absolute;
+            inset: -20%;
+            background: linear-gradient(115deg,
+                transparent 30%,
+                rgba(255,255,255,0.03) 45%,
+                rgba(216,216,216,0.10) 49%,
+                rgba(255,255,255,0.24) 50%,
+                rgba(216,216,216,0.10) 51%,
+                rgba(255,255,255,0.03) 55%,
+                transparent 70%);
+            transform: translateX(-60%) translateY(-10%);
+            mix-blend-mode: screen;
+            z-index: 2;
+            pointer-events: none;
+            animation: sheenSweep 1.6s cubic-bezier(0.45,0,0.2,1) forwards;
+        }
+        @keyframes sheenSweep {
+            0%   { transform: translateX(-60%) translateY(-10%); }
+            60%  { transform: translateX(15%) translateY(4%); }
+            100% { transform: translateX(65%) translateY(12%); }
+        }
+
+        .pre-center-content {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 26px;
+        }
+
+        /* luxury logo reveal */
+        .pre-logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transform: scale(0.82);
+            filter: blur(6px);
+            animation: logoReveal 0.7s cubic-bezier(0.16,0.84,0.32,1) 0.05s forwards;
+        }
+        @keyframes logoReveal {
+            0%   { opacity: 0; transform: scale(0.8); filter: blur(6px); }
+            55%  { opacity: 1; filter: blur(0); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
+        }
+        .pre-logo-mark {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.7rem;
+            font-weight: 600;
+            color: var(--gold);
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(214,180,107,0.2);
+        }
+        .pre-logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--white);
+            opacity: 0;
+            animation: trackIn 0.85s cubic-bezier(0.16,0.84,0.32,1) 0.15s forwards;
+        }
+        @keyframes trackIn {
+            0%   { letter-spacing: 0.05em; opacity: 0; }
+            100% { letter-spacing: 0.6em; opacity: 1; }
+        }
+
+        .pre-loading-container {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            opacity: 0;
+            animation: fadeUp 0.55s ease 0.5s forwards;
+        }
+        @keyframes fadeUp {
+            0%   { opacity: 0; transform: translateY(6px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* sound-ready visualizer bars */
+        .pre-sound-wave {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 14px;
+        }
+        .pre-sound-wave span {
+            width: 2px;
+            height: 25%;
+            background: var(--titanium-dim);
+            box-shadow: none;
+            animation: soundBar 0.8s ease-in-out infinite;
+        }
+        .pre-sound-wave span:nth-child(1){ animation-delay: 0s; }
+        .pre-sound-wave span:nth-child(2){ animation-delay: 0.11s; }
+        .pre-sound-wave span:nth-child(3){ animation-delay: 0.22s; }
+        .pre-sound-wave span:nth-child(4){ animation-delay: 0.33s; }
+        .pre-sound-wave span:nth-child(5){ animation-delay: 0.44s; }
+        @keyframes soundBar { 0%,100% { height: 22%; opacity: 0.5; } 50% { height: 100%; opacity: 1; } }
+
+        .pre-bar-track {
+            width: 130px;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .pre-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--titanium-dim), var(--titanium), var(--titanium-dim));
+            box-shadow: 0 0 6px rgba(200,205,213,0.2);
+        }
+        .pre-percentage {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            color: var(--text-secondary);
+            min-width: 34px;
+            font-variant-numeric: tabular-nums;
+        }
+        .pre-percentage-sign { color: var(--titanium-dim); margin-left: 1px; }
+
+        /* glass morph transition panel */
+        .pre-glass-morph {
+            position: absolute;
+            inset: 0;
+            z-index: 4;
+            background: rgba(245,245,240,0.06);
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* exit sequence — glass wipe + soft outward zoom of the whole intro */
+        #preloader.exiting .pre-ignition-glow,
+        #preloader.exiting .pre-metallic-sheen,
+        #preloader.exiting .pre-logo-wrapper,
+        #preloader.exiting .pre-logo-text,
+        #preloader.exiting .pre-loading-container {
+            animation-play-state: paused;
+        }
+        #preloader.exiting {
+            animation: preloaderZoomOut 0.5s cubic-bezier(0.6,0,0.4,1) forwards;
+        }
+        #preloader.exiting .pre-glass-morph {
+            animation: glassMorphWipe 0.5s cubic-bezier(0.6,0,0.4,1) forwards;
+        }
+        @keyframes preloaderZoomOut {
+            0%   { transform: scale(1);    opacity: 1; filter: blur(0); }
+            100% { transform: scale(1.12); opacity: 0; filter: blur(10px); }
+        }
+        @keyframes glassMorphWipe {
+            0%   { opacity: 0; backdrop-filter: blur(0px);  -webkit-backdrop-filter: blur(0px); }
+            40%  { opacity: 1; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+            100% { opacity: 0; backdrop-filter: blur(0px);  -webkit-backdrop-filter: blur(0px); transform: scale(1.4); }
+        }
+
+        /* ─── MAIN WRAPPER (soft camera push-in as the intro clears) ─── */
+        #mainWrapper {
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: scale(1.045);
+            filter: blur(6px);
+            transition: opacity 0.7s cubic-bezier(0.16,0.84,0.32,1),
+                        transform 0.9s cubic-bezier(0.16,0.84,0.32,1),
+                        filter 0.7s ease;
+        }
+        #mainWrapper.visible { opacity: 1; transform: scale(1); filter: blur(0); }
+
+        /* ─── NAVIGATION ─── */
+        #siteNav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            padding: 0 clamp(24px, 5vw, 80px);
+            transition: background 0.5s, border-color 0.5s, backdrop-filter 0.5s;
+        }
+        #siteNav.scrolled {
+            background: rgba(5,5,5,0.88);
+            backdrop-filter: blur(20px) saturate(1.2);
+            -webkit-backdrop-filter: blur(20px) saturate(1.2);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-edge), 0 4px 24px rgba(0,0,0,0.3);
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--gold-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--gold);
+            font-weight: 600;
+            flex-shrink: 0;
+            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+            box-shadow: var(--shadow-edge);
+        }
+        .nav-logo:hover .logo-mark {
+            background: var(--gold-muted);
+            border-color: var(--gold);
+            box-shadow: var(--shadow-edge), 0 0 12px rgba(214,180,107,0.08);
+        }
+        .logo-wordmark {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.38em;
+            color: var(--white);
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            align-items: center;
+        }
+        .nav-links a {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.67rem;
+            font-weight: 500;
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+            padding-bottom: 2px;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.35s var(--transition);
+        }
+        .nav-links a:hover { color: var(--ice); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            padding: 10px 24px;
+            border: 1px solid var(--border);
+            font-size: 0.62rem;
+            letter-spacing: var(--tracking-wider);
+            color: var(--titanium);
+            text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.35s;
+            white-space: nowrap;
+            background: var(--metal-gradient);
+            box-shadow: var(--shadow-edge), var(--shadow-edge-deep);
+        }
+        .nav-cta:hover {
+            border-color: var(--ice-dim);
+            color: var(--ice);
+            box-shadow: var(--shadow-edge), 0 0 16px var(--ice-muted);
+        }
+        .nav-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .nav-menu-btn span {
+            display: block;
+            width: 22px;
+            height: 1px;
+            background: var(--white);
+            transition: all 0.35s;
+        }
+        .nav-menu-btn.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+        .nav-menu-btn.open span:nth-child(2) { opacity:0; }
+        .nav-menu-btn.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+
+        /* Mobile nav overlay */
+        #mobileNav {
+            position: fixed;
+            inset: 0;
+            background: rgba(5,5,5,0.97);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s;
+        }
+        #mobileNav.open { opacity:1; pointer-events:all; }
+        #mobileNav a {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            padding: 12px 0;
+            transition: color 0.3s;
+        }
+        #mobileNav a:hover { color: var(--ice); }
+        #mobileNav .mob-nav-divider {
+            width: 40px; height: 1px;
+            background: var(--border);
+            margin: 8px 0;
+        }
+        #mobileNav .mob-close {
+            position: absolute;
+            top: 24px; right: 28px;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none; border: none;
+            transition: color 0.3s;
+        }
+        #mobileNav .mob-close:hover { color: var(--ice); }
+
+        @media (max-width:900px) {
+            .nav-links { display:none; }
+            .nav-cta { display:none; }
+            .nav-menu-btn { display:flex; }
+        }
+
+        /* ─── SECTION BASE ─── */
+        section {
+            position: relative;
+            z-index: 2;
+        }
+        .section-inner {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 clamp(24px, 5vw, 80px);
+            position: relative;
+            z-index: 3;
+        }
+        .section-eyebrow {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+            color: var(--titanium-dim);
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .section-eyebrow::before {
+            content: '';
+            width: 32px; height: 1px;
+            background: var(--gold);
+            flex-shrink: 0;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+            font-weight: 300;
+            letter-spacing: var(--tracking-tight);
+            color: var(--white);
+            margin-bottom: 18px;
+            line-height: var(--leading-tight);
+        }
+        .section-title em { font-style: italic; color: var(--titanium); }
+        .section-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            letter-spacing: var(--tracking-normal);
+            line-height: var(--leading-relaxed);
+            max-width: 520px;
+        }
+        .gold-line {
+            width: 48px; height: 1px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+            margin: 32px 0;
+        }
+
+        /* ─── ENTRANCE ANIMATIONS ─── */
+        .entrance-item {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.9s var(--transition), transform 0.9s var(--transition);
+        }
+        .animate-in .entrance-item { opacity:1; transform:translateY(0); }
+        .animate-in .entrance-item:nth-child(1) { transition-delay: 0.1s; }
+        .animate-in .entrance-item:nth-child(2) { transition-delay: 0.28s; }
+        .animate-in .entrance-item:nth-child(3) { transition-delay: 0.46s; }
+        .animate-in .entrance-item:nth-child(4) { transition-delay: 0.64s; }
+        .animate-in .entrance-item:nth-child(5) { transition-delay: 0.82s; }
+        .animate-in .entrance-item:nth-child(6) { transition-delay: 1.0s; }
+
+        /* ─── BUTTONS ─── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 36px;
+            border-radius: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.4s var(--transition);
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            border: none;
+            outline: none;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+            border: 1px solid var(--gold);
+        }
+        .btn-primary:hover {
+            background: var(--gold-bright);
+            border-color: var(--gold-bright);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(201,168,76,0.25);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn-ghost:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+        .btn-outline-gold {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold-border);
+        }
+        .btn-outline-gold:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .btn .arrow { transition: transform 0.3s; font-style:normal; }
+        .btn:hover .arrow { transform: translateX(5px); }
+
+        /* ─── SCROLL INDICATOR ─── */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 36px; left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            animation: scrollFadeIn 2.5s ease-out 2.2s both;
+        }
+        @keyframes scrollFadeIn {
+            from { opacity:0; transform: translateX(-50%) translateY(12px); }
+            to   { opacity:1; transform: translateX(-50%) translateY(0); }
+        }
+        .scroll-indicator span {
+            font-size: 0.58rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(180deg, var(--gold), transparent);
+            animation: scrollLineAnim 2s ease-in-out infinite;
+        }
+        @keyframes scrollLineAnim {
+            0%,100% { transform: scaleY(1); opacity:0.4; }
+            50%      { transform: scaleY(0.6); opacity:1; }
+        }
+
+        /* ═══════════════════════════════════════
+           HERO SECTION
+        ═══════════════════════════════════════ */
+        #hero {
+            height: 100vh;
+            min-height: 700px;
+            position: relative;
+            overflow: hidden;
+            background: var(--black);
+            display: flex;
+            align-items: center;
+            padding: 0;
+        }
+        .hero-bg-layer {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 70% 50%, rgba(201,168,76,0.05) 0%, transparent 55%),
+                radial-gradient(ellipse at 20% 70%, rgba(14,14,14,0.9) 0%, transparent 60%),
+                var(--black);
+            z-index: 0;
+        }
+        /* Subtle carbon fiber grid texture */
+        .hero-bg-layer::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.012) 39px, rgba(255,255,255,0.012) 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.012) 39px, rgba(255,255,255,0.012) 40px);
+            pointer-events: none;
+        }
+        .hero-car-visual {
+            position: absolute;
+            right: -2%;
+            bottom: 0;
+            width: 62%;
+            height: 90%;
+            z-index: 2;
+            background: url('assets/hero.png') center bottom / contain no-repeat;
+            will-change: transform;
+        }
+        .hero-left-fade {
+            position: absolute;
+            left: 0; top: 0;
+            width: 58%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(8,8,8,1) 35%, rgba(8,8,8,0.7) 65%, transparent 100%);
+            z-index: 3;
+            pointer-events: none;
+        }
+        .hero-bottom-fade {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 200px;
+            background: linear-gradient(0deg, var(--black) 0%, transparent 100%);
+            z-index: 4;
+            pointer-events: none;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 0 clamp(24px, 8vw, 120px);
+            padding-top: 72px;
+            max-width: 680px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .hero-eyebrow {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            width: 40px; height: 1px;
+            background: var(--gold);
+        }
+        .hero-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.8rem, 7.5vw, 7rem);
+            font-weight: 300;
+            line-height: 1.0;
+            letter-spacing: -0.01em;
+            color: var(--white);
+            margin-bottom: 28px;
+        }
+        .hero-heading .word-italic {
+            display: block;
+            font-style: italic;
+            color: var(--gold);
+        }
+        .hero-sub {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+            line-height: 1.9;
+            margin-bottom: 44px;
+            max-width: 420px;
+        }
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 56px;
+        }
+        /* Typing line in hero */
+        .hero-typing-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border: 1px solid var(--border-subtle);
+            background: var(--glass-bg);
+        }
+        .hero-typing-label {
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+        .typed-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--gold);
+        }
+        .cursor-blink {
+            display: inline-block;
+            width: 2px; height: 0.9em;
+            background: var(--gold);
+            animation: cursorBlink 0.7s step-end infinite;
+            vertical-align: text-bottom;
+            margin-left: 1px;
+        }
+        @keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+        /* Hero stats bar */
+        .hero-stats-bar {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            z-index: 10;
+            display: flex;
+            border-top: 1px solid var(--border-subtle);
+            background: rgba(8,8,8,0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hstat-item {
+            flex: 1;
+            padding: clamp(16px,2.5vw,28px) clamp(20px,4vw,48px);
+            border-right: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .hstat-item:last-child { border-right: none; }
+        .hstat-val {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.6rem,3vw,2.4rem);
+            font-weight: 300;
+            color: var(--gold);
+            line-height: 1;
+        }
+        .hstat-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--titanium);
+        }
+
+        /* ═══════════════════════════════════════
+           HERITAGE SECTION (was About)
+        ═══════════════════════════════════════ */
+        #heritage {
+            padding: var(--section-pad) 0;
+            background:
+                radial-gradient(ellipse at 80% 40%, rgba(201,168,76,0.04) 0%, transparent 55%),
+                var(--carbon);
+        }
+        .heritage-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .heritage-quote-col {
+            position: relative;
+        }
+        .heritage-big-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 5vw, 5rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 32px;
+        }
+        .heritage-big-quote .q-gold { color: var(--gold); }
+        .heritage-cite {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .heritage-cite::before { content: ''; width: 24px; height: 1px; background: var(--text-muted); }
+        .heritage-body-col {}
+        .heritage-body-col p {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 24px;
+        }
+        .heritage-stats-row {
+            display: flex;
+            gap: 40px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: 32px;
+        }
+        .h-stat {}
+        .h-stat-val {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: var(--gold);
+            line-height: 1;
+            display: block;
+        }
+        .h-stat-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 6px;
+            display: block;
+        }
+        .about-glass { transition: transform 0.2s ease-out; }
+
+        /* ═══════════════════════════════════════
+           MODELS SECTION (was Services)
+        ═══════════════════════════════════════ */
+        #models {
+            padding: var(--section-pad) 0;
+            background: var(--black);
+        }
+        .models-header { margin-bottom: 64px; }
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border-subtle);
+        }
+        .model-card {
+            background: var(--black);
+            padding: 48px 36px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.5s var(--transition);
+        }
+        .model-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.5s var(--transition);
+        }
+        .model-card:hover::before { width: 100%; }
+        .model-card:hover { background: var(--graphite); }
+        .model-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.04);
+            line-height: 1;
+            position: absolute;
+            top: 20px; right: 24px;
+            letter-spacing: -0.02em;
+            transition: color 0.5s;
+        }
+        .model-card:hover .model-num { color: rgba(201,168,76,0.07); }
+        .model-tag {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .model-tag::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+        .model-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 300;
+            color: var(--white);
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+        .model-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--titanium);
+            margin-bottom: 28px;
+        }
+        .model-spec-row {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .model-spec-val {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--white);
+        }
+        .model-spec-unit {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.7rem;
+            color: var(--titanium);
+            letter-spacing: 0.1em;
+        }
+        .model-desc {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 32px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-subtle);
+        }
+        .model-link {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: gap 0.3s;
+        }
+        .model-link::after { content: '→'; }
+        .model-card:hover .model-link { gap: 16px; }
+        /* Accent bar per model */
+        .model-card.phantom .model-accent { background: var(--crimson-bright); }
+        .model-card.specter  .model-accent { background: var(--electric-bright); }
+        .model-card.apex     .model-accent { background: var(--gold); }
+        .model-accent { width: 32px; height: 2px; margin-bottom: 20px; }
+
+        /* ═══════════════════════════════════════
+           GALLERY SECTION (was Portfolio)
+        ═══════════════════════════════════════ */
+        #gallery {
+            padding: var(--section-pad) 0;
+            background: var(--carbon);
+        }
+        .gallery-header {
+            margin-bottom: 56px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 2px;
+        }
+        .gallery-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--surface);
+        }
+        .gallery-card:nth-child(1) { grid-row: span 2; aspect-ratio: 3/4; }
+        .gallery-card:nth-child(2) { aspect-ratio: 16/9; }
+        .gallery-card:nth-child(3) { aspect-ratio: 16/9; }
+        .gallery-card:nth-child(4) {
+            grid-column: span 2;
+            aspect-ratio: 21/7;
+        }
+        .gallery-img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s var(--transition);
+            display: block;
+        }
+        .gallery-css-bg {
+            width: 100%; height: 100%;
+            transition: transform 0.7s var(--transition);
+        }
+        .gc-hero {
+            background:
+                radial-gradient(ellipse at 40% 50%, rgba(122,18,18,0.35) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.12) 0%, transparent 50%),
+                linear-gradient(135deg, #0D0808, #1A0A0A, #0D0A08);
+        }
+        .gc-side {
+            background:
+                radial-gradient(ellipse at 60% 70%, rgba(30,111,168,0.25) 0%, transparent 60%),
+                linear-gradient(160deg, #08080D, #0A0D1A, #080808);
+        }
+        .gc-detail {
+            background:
+                radial-gradient(ellipse at 30% 40%, rgba(201,168,76,0.2) 0%, transparent 55%),
+                linear-gradient(45deg, #0D0D08, #1A1A0D);
+        }
+        .gc-wide {
+            background:
+                radial-gradient(ellipse at 50% 50%, rgba(20,20,20,0.8) 0%, transparent 70%),
+                linear-gradient(90deg, #0D0808, #080808, #0D0808);
+        }
+        .gallery-card:hover .gallery-img,
+        .gallery-card:hover .gallery-css-bg { transform: scale(1.06); }
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 28px;
+            transition: background 0.4s;
+        }
+        .gallery-card:hover .gallery-overlay { background: rgba(0,0,0,0.35); }
+        .gallery-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 4px;
+            transform: translateY(8px);
+            opacity: 0;
+            transition: all 0.4s 0.05s;
+        }
+        .gallery-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: var(--white);
+            letter-spacing: 0.04em;
+            transform: translateY(8px);
+            opacity: 0;
+            transition: all 0.4s;
+        }
+        .gallery-card:hover .gallery-label,
+        .gallery-card:hover .gallery-title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ═══════════════════════════════════════
+           CONFIGURE SECTION (was Pricing)
+        ═══════════════════════════════════════ */
+        #configure {
+            padding: var(--section-pad) 0;
+            background: var(--black);
+        }
+        .configure-header { margin-bottom: 64px; }
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border-subtle);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .config-card {
+            background: var(--black);
+            padding: 48px 36px;
+            text-align: left;
+            transition: all 0.5s var(--transition);
+            position: relative;
+        }
+        .config-card.featured {
+            background: var(--graphite);
+        }
+        .config-card.featured::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: var(--gold);
+        }
+        .config-card:hover { background: var(--graphite); }
+        .config-tier {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--titanium);
+            margin-bottom: 8px;
+        }
+        .config-badge {
+            display: inline-block;
+            padding: 3px 12px;
+            border: 1px solid var(--gold-border);
+            font-size: 0.58rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+        .config-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+        .config-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 4px;
+            line-height: 1;
+        }
+        .config-price-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.62rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            margin-bottom: 32px;
+        }
+        .config-features {
+            list-style: none;
+            margin-bottom: 36px;
+        }
+        .config-features li {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            padding: 9px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.02em;
+        }
+        .config-features li::before {
+            content: '';
+            width: 4px; height: 4px;
+            background: var(--gold-dim);
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════════════════
+           TESTIMONIALS SECTION
+        ═══════════════════════════════════════ */
+        #testimonials {
+            padding: var(--section-pad) 0;
+            background: var(--carbon);
+        }
+        .testimonials-header { margin-bottom: 56px; }
+        .testimonial-carousel {
+            display: flex;
+            gap: 1px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .testimonial-carousel::-webkit-scrollbar { display:none; }
+        .testimonial-card {
+            flex: 0 0 380px;
+            scroll-snap-align: start;
+            background: var(--black);
+            padding: 40px 32px;
+            transition: all 0.4s var(--transition);
+            position: relative;
+        }
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: var(--border-subtle);
+            transition: background 0.4s;
+        }
+        .testimonial-card:hover::before { background: var(--gold); }
+        .testimonial-card:hover { background: var(--graphite); }
+        .t-quote-mark {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--gold);
+            opacity: 0.3;
+            line-height: 0.6;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .testimonial-card p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--silver);
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+        .t-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .t-avatar {
+            width: 40px; height: 40px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+        .t-author-info h5 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: 0.05em;
+        }
+        .t-author-info span {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+        }
+        .testimonial-dots {
+            display: flex;
+            gap: 8px;
+            margin-top: 36px;
+        }
+        .testimonial-dot {
+            width: 24px; height: 1px;
+            background: rgba(255,255,255,0.15);
+            cursor: pointer;
+            border: none;
+            transition: all 0.35s;
+        }
+        .testimonial-dot.active {
+            background: var(--gold);
+            width: 48px;
+        }
+
+        /* ═══════════════════════════════════════
+           RESERVE SECTION (was Contact)
+        ═══════════════════════════════════════ */
+        #reserve {
+            padding: var(--section-pad) 0;
+            background: var(--black);
+            min-height: auto;
+        }
+        .reserve-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+        .reserve-info {}
+        .reserve-info .reserve-body {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 36px;
+        }
+        .reserve-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .rc-icon {
+            width: 32px; height: 32px;
+            border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .rc-icon svg { width: 14px; height: 14px; stroke: var(--gold); fill: none; }
+        .rc-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+        .rc-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .reserve-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 1px;
+        }
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 18px 20px;
+            background: var(--graphite);
+            border: none;
+            border-bottom: 1px solid var(--border-subtle);
+            color: var(--white);
+            font-size: 0.9rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            outline: none;
+            transition: all 0.35s;
+            resize: vertical;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        .input-group select { cursor: pointer; }
+        .input-group select option { background: var(--surface); }
+        .input-group label {
+            position: absolute;
+            left: 20px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            font-family: 'Outfit', sans-serif;
+        }
+        .input-group textarea ~ label { top: 22px; transform: none; }
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            border-bottom-color: var(--gold);
+            background: var(--surface);
+        }
+        .input-group input:focus ~ label,
+        .input-group input:not(:placeholder-shown) ~ label,
+        .input-group textarea:focus ~ label,
+        .input-group textarea:not(:placeholder-shown) ~ label,
+        .input-group select:focus ~ label,
+        .input-group select:not([value=""]) ~ label {
+            top: 8px; font-size: 0.62rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            transform: none;
+        }
+        .btn-submit {
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 18px 40px;
+            font-size: 0.72rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s;
+            width: 100%;
+            margin-top: 2px;
+        }
+        .btn-submit:hover {
+            background: var(--gold-bright);
+            box-shadow: 0 8px 32px rgba(201,168,76,0.25);
+        }
+        .btn-submit:active { transform: scale(0.98); }
+
+        /* ═══════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════ */
+        #footer {
+            background: var(--carbon);
+            border-top: 1px solid var(--border-subtle);
+            position: relative;
+            z-index: 2;
+        }
+        .footer-top {
+            padding: 64px clamp(24px,5vw,80px) 48px;
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 60px;
+        }
+        .footer-brand-col {}
+        .footer-logo-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .footer-brand-col p {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            line-height: 1.8;
+            max-width: 240px;
+        }
+        .footer-col-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer-links a {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-bottom {
+            border-top: 1px solid var(--border-subtle);
+            padding: 20px clamp(24px,5vw,80px);
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .footer-bottom p {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+        .social-icons {
+            display: flex;
+            gap: 12px;
+        }
+        .social-icon {
+            width: 36px; height: 36px;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--titanium);
+            font-size: 0.8rem;
+            transition: all 0.35s;
+        }
+        .social-icon:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .social-icon svg { width:15px; height:15px; fill:currentColor; }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════ */
+        @media (max-width: 1100px) {
+            .heritage-grid { grid-template-columns: 1fr; gap: 48px; }
+            .models-grid { grid-template-columns: 1fr; gap: 1px; }
+            .config-grid { grid-template-columns: 1fr; gap: 1px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-card:nth-child(1) { grid-row: auto; aspect-ratio: 16/9; }
+            .gallery-card:nth-child(4) { grid-column: auto; aspect-ratio: 16/9; }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+        }
+        @media (max-width: 768px) {
+            :root { --section-pad: 80px; }
+            .hero-car-visual { width: 90%; right: -15%; opacity: 0.35; }
+            .hero-left-fade { width: 100%; background: rgba(8,8,8,0.7); }
+            .hero-heading { font-size: clamp(3rem, 9vw, 4.5rem); }
+            .hero-stats-bar { display: none; }
+            .reserve-grid { grid-template-columns: 1fr; gap: 48px; }
+            .testimonial-card { flex: 0 0 300px; }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+        @media (max-width: 500px) {
+            :root { --section-pad: 64px; }
+            .hero-heading { font-size: clamp(2.5rem, 10vw, 3.5rem); }
+            .hero-ctas { flex-direction: column; width: 100%; }
+            .hero-ctas .btn { width: 100%; justify-content: center; }
+            .footer-top { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .heritage-big-quote { font-size: clamp(2rem, 8vw, 3rem); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cinematic Preloader — hypercar ignition intro -->
+    <div id="preloader">
+        <div class="pre-metallic-sheen"></div>
+        <div class="pre-ignition-glow"></div>
+
+        <div class="pre-center-content">
+            <div class="pre-logo-wrapper">
+                <div class="pre-logo-mark">V</div>
+                <div class="pre-logo-text">VELOX</div>
+            </div>
+
+            <div class="pre-loading-container">
+                <div class="pre-sound-wave">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="pre-bar-track"><div class="pre-bar-fill" id="preBarFill"></div></div>
+                <div class="pre-percentage"><span id="prePercentage">00</span><span class="pre-percentage-sign">%</span></div>
+            </div>
+        </div>
+
+        <div class="pre-glass-morph"></div>
+    </div>
+
+    <!-- Custom cursor -->
+    <div id="customCursor"></div>
+    <!-- Scroll progress -->
+    <div id="scrollProgress"></div>
+    <!-- Particles canvas -->
+    <canvas id="particlesCanvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="siteNav">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">
+                <div class="logo-mark">V</div>
+                <span class="logo-wordmark">VELOX</span>
+            </a>
+            <div class="nav-links">
+                <a href="#models">Models</a>
+                <a href="#heritage">Heritage</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#configure">Configure</a>
+            </div>
+            <a href="#reserve" class="nav-cta">Reserve</a>
+            <button class="nav-menu-btn" id="navMenuBtn" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav Overlay -->
+    <div id="mobileNav">
+        <button class="mob-close" id="mobileNavClose" aria-label="Close menu">✕</button>
+        <a href="#models" class="mobile-nav-link">Models</a>
+        <div class="mob-nav-divider"></div>
+        <a href="#heritage" class="mobile-nav-link">Heritage</a>
+        <div class="mob-nav-divider"></div>
+        <a href="#gallery" class="mobile-nav-link">Gallery</a>
+        <div class="mob-nav-divider"></div>
+        <a href="#configure" class="mobile-nav-link">Configure</a>
+        <div class="mob-nav-divider"></div>
+        <a href="#reserve" class="mobile-nav-link">Reserve</a>
+    </div>
+
+    <!-- Main Wrapper -->
+    <div id="mainWrapper">
+
+        <!-- ══ HERO ══ -->
+        <section id="hero">
+            <div class="hero-bg-layer"></div>
+            <div class="hero-car-visual" id="heroCarVisual"></div>
+            <div class="hero-left-fade"></div>
+            <div class="hero-bottom-fade"></div>
+
+            <div class="hero-content" id="heroContent">
+                <div class="hero-eyebrow entrance-item">The VELOX Phantom — 2026</div>
+                <h1 class="hero-heading entrance-item">
+                    Born From<br>
+                    <span class="word-italic">Obsession.</span>
+                </h1>
+                <p class="hero-sub entrance-item">
+                    1,340 BHP. 2.1 Seconds. 380 km/h.<br>
+                    The machine that rewrote what is possible.
+                </p>
+                <div class="hero-ctas entrance-item">
+                    <a href="#models" class="btn btn-primary">Discover the Phantom <span class="arrow">→</span></a>
+                    <a href="#reserve" class="btn btn-ghost">Reserve Now</a>
+                </div>
+                <div class="hero-typing-row entrance-item">
+                    <span class="hero-typing-label">Design is</span>
+                    <span class="typed-text" id="typedText"></span>
+                    <span class="cursor-blink"></span>
+                </div>
+            </div>
+
+            <!-- Stats bar -->
+            <div class="hero-stats-bar entrance-item" id="heroStats">
+                <div class="hstat-item">
+                    <span class="hstat-val">2.1s</span>
+                    <span class="hstat-label">0 – 100 km/h</span>
+                </div>
+                <div class="hstat-item">
+                    <span class="hstat-val">1,340</span>
+                    <span class="hstat-label">Brake Horsepower</span>
+                </div>
+                <div class="hstat-item">
+                    <span class="hstat-val">380</span>
+                    <span class="hstat-label">km/h Top Speed</span>
+                </div>
+                <div class="hstat-item">
+                    <span class="hstat-val">47</span>
+                    <span class="hstat-label">Vehicles in Existence</span>
+                </div>
+            </div>
+
+            <a href="#heritage" class="scroll-indicator">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </a>
+        </section>
+
+        <!-- ══ HERITAGE ══ -->
+        <section id="heritage">
+            <div class="section-inner">
+                <div class="heritage-grid about-card" id="heritageSection">
+                    <div class="heritage-quote-col">
+                        <div class="section-eyebrow">Heritage</div>
+                        <blockquote class="heritage-big-quote about-glass" id="aboutGlass">
+                            We don't build<br>cars. We build what<br>cars will <span class="q-gold">become.</span>
+                        </blockquote>
+                        <div class="heritage-cite">Erik Vandermeer, Founder &amp; Chief Designer</div>
+                    </div>
+                    <div class="heritage-body-col">
+                        <p>Founded in 2019 by a collective of aerospace engineers, Formula 1 aerodynamicists, and mastercraft artisans, VELOX Automobiles emerged from a single, uncompromising conviction: that the ultimate driving machine had not yet been built.</p>
+                        <p>Every VELOX is handcrafted at our atelier in Zurich, Switzerland. Each vehicle is bespoke — unique in specification, unique in soul. The machinery is aerospace. The soul is art.</p>
+                        <div class="gold-line"></div>
+                        <div class="heritage-stats-row">
+                            <div class="h-stat">
+                                <span class="h-stat-val">2019</span>
+                                <span class="h-stat-label">Founded</span>
+                            </div>
+                            <div class="h-stat">
+                                <span class="h-stat-val">340</span>
+                                <span class="h-stat-label">Artisans</span>
+                            </div>
+                            <div class="h-stat">
+                                <span class="h-stat-val">28</span>
+                                <span class="h-stat-label">Countries</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ MODELS ══ -->
+        <section id="models">
+            <div class="section-inner">
+                <div class="models-header">
+                    <div class="section-eyebrow">Our Models</div>
+                    <h2 class="section-title">Three <em>Machines.</em><br>One Obsession.</h2>
+                    <div class="gold-line"></div>
+                </div>
+                <div class="models-grid">
+
+                    <!-- Phantom -->
+                    <div class="model-card phantom" data-tilt>
+                        <div class="model-accent"></div>
+                        <span class="model-num">01</span>
+                        <div class="model-tag">Flagship Hypercar</div>
+                        <div class="model-name">Phantom</div>
+                        <div class="model-subtitle">The Apex of Everything</div>
+                        <div class="model-spec-row">
+                            <span class="model-spec-val">1,340</span>
+                            <span class="model-spec-unit">BHP</span>
+                        </div>
+                        <div class="model-spec-row">
+                            <span class="model-spec-val">2.1s</span>
+                            <span class="model-spec-unit">0–100 km/h</span>
+                        </div>
+                        <div class="model-spec-row">
+                            <span class="model-spec-val">380</span>
+                            <span class="model-spec-unit">km/h</span>
+                        </div>
+                        <p class="model-desc">Twin-turbocharged hybrid V8. Active aerodynamics. A Monocoque chassis hewn from aerospace-grade carbon fibre. The Phantom is not a car. It is a statement.</p>
+                        <a href="#reserve" class="model-link">Explore Phantom</a>
+                    </div>
+
+                    <!-- Specter -->
+                    <div class="model-card specter" data-tilt>
+                        <div class="model-accent"></div>
+                        <span class="model-num">02</span>
+                        <div class="model-tag">Grand Tourer</div>
+                        <div class="model-name">Specter</div>
+                        <div class="model-subtitle">Devastation with Grace</div>
+                        <div class="model-spec-row">
+                            <span class="model-spec-val">980</span>
+                            <span class="model-spec-unit">BHP</span>
+                        </div>
+                        <div class="model-spec-row">
+                            <span class="model-spec-val">2.8s</span>
+                            <span class="model-spec-unit">0–100 km/h</span>
+                        </div>
+                        <div class="model-spec-row">
+                            <span class="model-spec-val">340</span>
+                            <span class="model-spec-unit">km/h</span>
+                        </div>
+                        <p class="model-desc">The grand tourer reimagined. 980 horsepower of effortless velocity, draped in a body that moves air like sculpture. Built for those who travel without compromise.</p>
+                        <a href="#reserve" class="model-link">Explore Specter</a>
+                    </div>
+
+                    <!-- Apex -->
+                    <div class="model-card apex" data-tilt>
+                        <div class="model-accent"></div>
+                        <span class="model-num">03</span>
+                        <div class="model-tag">Track Edition</div>
+                        <div class="model-name">Apex</div>
+                        <div class="model-subtitle">Born on Circuit</div>
+                        <div class="model-spec-row">
+                            <span class="model-spec-val">1,100</span>
+                            <span class="model-spec-unit">BHP</span>
+                        </div>
+                        <div class="model-spec-row">
+                            <span class="model-spec-val">1.9s</span>
+                            <span class="model-spec-unit">0–100 km/h</span>
+                        </div>
+                        <div class="model-spec-row">
+                            <span class="model-spec-val">400</span>
+                            <span class="model-spec-unit">km/h</span>
+                        </div>
+                        <p class="model-desc">Stripped of excess. Forged for the racing line. The Apex carries no compromises, no comfort — only the relentless pursuit of a faster lap. Track-only. Street-illegal. Unforgettable.</p>
+                        <a href="#reserve" class="model-link">Explore Apex</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ GALLERY ══ -->
+        <section id="gallery">
+            <div class="section-inner">
+                <div class="gallery-header">
+                    <div class="section-eyebrow">Gallery</div>
+                    <h2 class="section-title">The Art of <em>Speed.</em></h2>
+                    <div class="gold-line"></div>
+                </div>
+            </div>
+            <div class="gallery-grid" style="padding: 0 clamp(24px,5vw,80px); max-width:1440px; margin:0 auto;">
+
+                <div class="gallery-card">
+                    <img src="assets/hero.png" alt="VELOX Phantom — Studio" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">VELOX Phantom</div>
+                        <div class="gallery-title">Studio Portrait</div>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <img src="assets/sideprofile.png" alt="VELOX Specter — Mountain" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">VELOX Specter</div>
+                        <div class="gallery-title">Mountain Run</div>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <img src="assets/detail.png" alt="VELOX — Wheel Detail" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">Detail Study</div>
+                        <div class="gallery-title">Carbon &amp; Gold</div>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <img src="assets/interior.png" alt="VELOX — Interior Cockpit" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">The Cockpit</div>
+                        <div class="gallery-title">Interior</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ══ CONFIGURE ══ -->
+        <section id="configure">
+            <div class="section-inner">
+                <div class="configure-header">
+                    <div class="section-eyebrow">Configuration</div>
+                    <h2 class="section-title">Begin Your <em>Build.</em></h2>
+                    <p class="section-subtitle">Every VELOX is a commission. Select your foundation. Our atelier handles everything else.</p>
+                    <div class="gold-line"></div>
+                </div>
+                <div class="config-grid">
+
+                    <div class="config-card">
+                        <div class="config-tier">Tier I</div>
+                        <div class="config-name">Standard</div>
+                        <div class="config-price">€2,400,000</div>
+                        <div class="config-price-label">Starting configuration</div>
+                        <ul class="config-features">
+                            <li>Full bespoke interior trim</li>
+                            <li>800 BHP baseline powertrain</li>
+                            <li>Carbon fibre body panels</li>
+                            <li>VELOX Connect infotainment</li>
+                            <li>2-year atelier warranty</li>
+                        </ul>
+                        <a href="#reserve" class="btn btn-outline-gold" style="width:100%; justify-content:center;">Reserve</a>
+                    </div>
+
+                    <div class="config-card featured">
+                        <div class="config-tier">Tier II</div>
+                        <div class="config-badge">Most Selected</div>
+                        <div class="config-name">Sport</div>
+                        <div class="config-price">€3,100,000</div>
+                        <div class="config-price-label">Enhanced performance build</div>
+                        <ul class="config-features">
+                            <li>Everything in Standard</li>
+                            <li>1,100 BHP hybrid powertrain</li>
+                            <li>Track-tuned suspension setup</li>
+                            <li>Titanium exhaust system</li>
+                            <li>Carbon ceramic brake package</li>
+                            <li>Bespoke Alcantara cockpit</li>
+                        </ul>
+                        <a href="#reserve" class="btn btn-primary" style="width:100%; justify-content:center;">Reserve</a>
+                    </div>
+
+                    <div class="config-card">
+                        <div class="config-tier">Tier III</div>
+                        <div class="config-name">Competition</div>
+                        <div class="config-price">€3,900,000</div>
+                        <div class="config-price-label">Ultimate specification</div>
+                        <ul class="config-features">
+                            <li>Everything in Sport</li>
+                            <li>1,340 BHP full race tune</li>
+                            <li>Active aero package</li>
+                            <li>Motorsport data telemetry</li>
+                            <li>Race harness &amp; roll cage</li>
+                            <li>Priority delivery — 6 months</li>
+                        </ul>
+                        <a href="#reserve" class="btn btn-outline-gold" style="width:100%; justify-content:center;">Reserve</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ TESTIMONIALS ══ -->
+        <section id="testimonials">
+            <div class="section-inner">
+                <div class="testimonials-header">
+                    <div class="section-eyebrow">Owner Testimonials</div>
+                    <h2 class="section-title">Those Who <em>Know.</em></h2>
+                    <div class="gold-line"></div>
+                </div>
+                <div class="testimonial-carousel" id="testimonialCarousel">
+                    <div class="testimonial-card">
+                        <span class="t-quote-mark">"</span>
+                        <p>Nothing I have driven in thirty years of collecting compares. The Phantom doesn't ask permission. It simply does what you never thought possible.</p>
+                        <div class="t-author">
+                            <div class="t-avatar">AK</div>
+                            <div class="t-author-info">
+                                <h5>Alexander Kovács</h5>
+                                <span>Phantom Owner · Budapest</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <span class="t-quote-mark">"</span>
+                        <p>I have owned Bugatti, Pagani, and Koenigsegg. The Specter is the only machine that made me feel genuinely vulnerable behind the wheel. That is the highest compliment I know.</p>
+                        <div class="t-author">
+                            <div class="t-avatar">PM</div>
+                            <div class="t-author-info">
+                                <h5>Priya Mehta</h5>
+                                <span>Specter Owner · Singapore</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <span class="t-quote-mark">"</span>
+                        <p>The Apex on circuit is not a car — it is a philosophy. Every single surface exists for a reason. VELOX understands that beauty and function are the same thing.</p>
+                        <div class="t-author">
+                            <div class="t-avatar">RS</div>
+                            <div class="t-author-info">
+                                <h5>Rafael Souza</h5>
+                                <span>Apex Owner &amp; Racing Driver · São Paulo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <span class="t-quote-mark">"</span>
+                        <p>From the first call to delivery took eight months. Every detail — every stitch, every finish — was exactly as I envisioned. VELOX doesn't build cars. They execute dreams.</p>
+                        <div class="t-author">
+                            <div class="t-avatar">NG</div>
+                            <div class="t-author-info">
+                                <h5>Nadia Gruber</h5>
+                                <span>Phantom Owner · Zurich</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-dots" id="testimonialDots"></div>
+            </div>
+        </section>
+
+        <!-- ══ RESERVE ══ -->
+        <section id="reserve">
+            <div class="section-inner">
+                <div class="reserve-grid">
+                    <div class="reserve-info">
+                        <div class="section-eyebrow">Reservation</div>
+                        <h2 class="section-title">Begin Your <em>Journey.</em></h2>
+                        <div class="gold-line"></div>
+                        <p class="reserve-body">VELOX accepts reservations by appointment only. Each vehicle is a singular commission — handcrafted to your precise specification at our Zurich atelier. Production time: 8 to 14 months.</p>
+                        <div class="reserve-contact-item">
+                            <div class="rc-icon">
+                                <svg viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+                            </div>
+                            <div>
+                                <div class="rc-label">Commission</div>
+                                <div class="rc-value">commissions@velox-automobiles.com</div>
+                            </div>
+                        </div>
+                        <div class="reserve-contact-item">
+                            <div class="rc-icon">
+                                <svg viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+                            </div>
+                            <div>
+                                <div class="rc-label">Atelier</div>
+                                <div class="rc-value">Zurich, Switzerland — Since 2019</div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="reserve-form" id="contactForm">
+                        <div class="input-group">
+                            <input type="text" id="name" placeholder=" " required>
+                            <label for="name">Full Name</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" id="email" placeholder=" " required>
+                            <label for="email">Email Address</label>
+                        </div>
+                        <div class="input-group">
+                            <select id="model" required>
+                                <option value="" disabled selected></option>
+                                <option value="phantom">VELOX Phantom — Flagship</option>
+                                <option value="specter">VELOX Specter — Grand Tourer</option>
+                                <option value="apex">VELOX Apex — Track Edition</option>
+                            </select>
+                            <label for="model">Model Interest</label>
+                        </div>
+                        <div class="input-group">
+                            <textarea id="message" rows="4" placeholder=" " required></textarea>
+                            <label for="message">Your Message</label>
+                        </div>
+                        <button type="submit" class="btn-submit">Submit Reservation</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ FOOTER ══ -->
+        <footer id="footer">
+            <div class="footer-top">
+                <div class="footer-brand-col">
+                    <div class="footer-logo-row">
+                        <div class="logo-mark">V</div>
+                        <span class="logo-wordmark">VELOX</span>
+                    </div>
+                    <p>Handcrafted hypercars born from obsession. Built at our atelier in Zurich, Switzerland.</p>
+                </div>
+                <div>
+                    <div class="footer-col-title">Models</div>
+                    <ul class="footer-links">
+                        <li><a href="#models">Phantom</a></li>
+                        <li><a href="#models">Specter</a></li>
+                        <li><a href="#models">Apex</a></li>
+                        <li><a href="#configure">Configure</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Company</div>
+                    <ul class="footer-links">
+                        <li><a href="#heritage">Heritage</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#reserve">Atelier</a></li>
+                        <li><a href="#reserve">Press</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Contact</div>
+                    <ul class="footer-links">
+                        <li><a href="#reserve">Reserve</a></li>
+                        <li><a href="mailto:commissions@velox-automobiles.com">Commissions</a></li>
+                        <li><a href="#">Media Enquiries</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 VELOX Automobiles SA. All rights reserved. Zurich, Switzerland.</p>
+                <div class="social-icons">
+                    <!-- X / Twitter -->
+                    <a href="#" class="social-icon" aria-label="X">
+                        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.258 5.63L18.244 2.25zM17.083 20.25h1.833L7.084 4.126H5.117L17.083 20.25z"/></svg>
+                    </a>
+                    <!-- Instagram -->
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <!-- YouTube -->
+                    <a href="#" class="social-icon" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+    </div><!-- /mainWrapper -->
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+    (function() {
+        // ════ DOM REFS ════
+        const preloader        = document.getElementById('preloader');
+        const mainWrapper      = document.getElementById('mainWrapper');
+        const heroContent      = document.getElementById('heroContent');
+        const customCursor     = document.getElementById('customCursor');
+        const scrollProgressEl = document.getElementById('scrollProgress');
+        const particlesCanvas  = document.getElementById('particlesCanvas');
+        const ctx              = particlesCanvas.getContext('2d');
+        const typedTextEl      = document.getElementById('typedText');
+        const heroCarVisual    = document.getElementById('heroCarVisual');
+        const heroStats        = document.getElementById('heroStats');
+        const aboutGlass       = document.getElementById('aboutGlass');
+        const testimonialCarousel = document.getElementById('testimonialCarousel');
+        const testimonialDots  = document.getElementById('testimonialDots');
+        const hero             = document.getElementById('hero');
+        const siteNav          = document.getElementById('siteNav');
+        const navMenuBtn       = document.getElementById('navMenuBtn');
+        const mobileNav        = document.getElementById('mobileNav');
+        const mobileNavClose   = document.getElementById('mobileNavClose');
+
+        // ════ CINEMATIC PRELOADER (hypercar ignition — ~1.6s total) ════
+        const PRELOADER_DURATION = 1650; // holds the full "loading" beat: logo, ignition, percentage, sheen
+        const EXIT_DURATION      = 500;  // glass morph + soft zoom clearing into the hero
+        const prePercentageEl    = document.getElementById('prePercentage');
+        const preBarFillEl       = document.getElementById('preBarFill');
+
+        function animatePreloadCounter(duration) {
+            const start = performance.now();
+            function tick(now) {
+                const t = Math.min(1, (now - start) / duration);
+                const eased = 1 - Math.pow(1 - t, 3); // ease-out, settles just before exit
+                const pct = Math.round(eased * 100);
+                if (prePercentageEl) prePercentageEl.textContent = String(pct).padStart(2, '0');
+                if (preBarFillEl) preBarFillEl.style.width = (eased * 100) + '%';
+                if (t < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }
+        animatePreloadCounter(PRELOADER_DURATION - 150);
+
+        function hidePreloader() {
+            preloader.classList.add('exiting');       // glass morph wipe + soft outward zoom
+            mainWrapper.classList.add('visible');      // hero pushes in with a soft camera zoom
+            setTimeout(() => heroContent.classList.add('animate-in'), 180);
+            setTimeout(() => {
+                if (heroStats) heroStats.style.opacity = '1';
+                preloader.classList.add('hidden');
+                if (preloader.parentNode) preloader.remove();
+            }, EXIT_DURATION);
+        }
+
+        setTimeout(hidePreloader, PRELOADER_DURATION);
+
+        // ════ PARTICLES ════
+        let particles = [];
+        const PARTICLE_COUNT = 70;
+
+        function resizeCanvas() {
+            particlesCanvas.width  = window.innerWidth;
+            particlesCanvas.height = document.body.scrollHeight || window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+        window.addEventListener('scroll', resizeCanvas);
+
+        function createParticle() {
+            // Gold (hue ~42) and silver (desaturated ~210) particles
+            const isGold = Math.random() < 0.65;
+            return {
+                x: Math.random() * particlesCanvas.width,
+                y: Math.random() * particlesCanvas.height,
+                radius: Math.random() * 1.6 + 0.4,
+                speedX: (Math.random() - 0.5) * 0.25,
+                speedY: -(Math.random() * 0.4 + 0.1),
+                opacity: Math.random() * 0.5 + 0.1,
+                hue: isGold ? 38 + Math.random() * 14 : 200 + Math.random() * 20,
+                sat: isGold ? 55 + Math.random() * 20 : 8 + Math.random() * 12,
+                pulseSpeed: Math.random() * 0.015 + 0.003,
+                pulseOffset: Math.random() * Math.PI * 2,
+            };
+        }
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(createParticle());
+        }
+        initParticles();
+
+        function animateParticles(ts) {
+            ctx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
+            particles.forEach(p => {
+                p.x += p.speedX; p.y += p.speedY;
+                if (p.y < -20) p.y = particlesCanvas.height + 20;
+                if (p.y > particlesCanvas.height + 20) p.y = -20;
+                if (p.x < -20) p.x = particlesCanvas.width + 20;
+                if (p.x > particlesCanvas.width + 20) p.x = -20;
+                const pulse = Math.sin(ts * p.pulseSpeed + p.pulseOffset) * 0.3 + 0.7;
+                const op = p.opacity * pulse;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `hsla(${p.hue},${p.sat}%,68%,${op})`;
+                ctx.fill();
+                if (p.radius > 1.0) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius * 3, 0, Math.PI * 2);
+                    ctx.fillStyle = `hsla(${p.hue},${p.sat}%,60%,${op * 0.08})`;
+                    ctx.fill();
+                }
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        requestAnimationFrame(animateParticles);
+
+        // ════ CUSTOM CURSOR ════
+        let cursorX = -100, cursorY = -100, targetCX = -100, targetCY = -100;
+        document.addEventListener('mousemove', e => { targetCX = e.clientX; targetCY = e.clientY; });
+        document.addEventListener('mouseleave', () => { targetCX = -200; targetCY = -200; });
+        document.querySelectorAll('a, button, .btn, .model-card, .gallery-card, .config-card, .social-icon, .testimonial-card').forEach(el => {
+            el.addEventListener('mouseenter', () => customCursor.classList.add('expanded'));
+            el.addEventListener('mouseleave', () => customCursor.classList.remove('expanded'));
+        });
+        function updateCursor() {
+            cursorX += (targetCX - cursorX) * 0.2;
+            cursorY += (targetCY - cursorY) * 0.2;
+            customCursor.style.left = cursorX + 'px';
+            customCursor.style.top  = cursorY + 'px';
+            requestAnimationFrame(updateCursor);
+        }
+        requestAnimationFrame(updateCursor);
+        customCursor.style.left = '-100px';
+        customCursor.style.top  = '-100px';
+
+        // ════ SCROLL PROGRESS ════
+        window.addEventListener('scroll', () => {
+            const scrollTop  = window.scrollY;
+            const docHeight  = document.body.scrollHeight - window.innerHeight;
+            const progress   = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            scrollProgressEl.style.width = Math.min(progress, 100) + '%';
+        });
+
+        // ════ NAV SCROLL STATE ════
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) siteNav.classList.add('scrolled');
+            else siteNav.classList.remove('scrolled');
+        });
+
+        // ════ MOBILE NAV ════
+        navMenuBtn.addEventListener('click', () => {
+            navMenuBtn.classList.toggle('open');
+            mobileNav.classList.toggle('open');
+            document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+        });
+        mobileNavClose.addEventListener('click', () => {
+            navMenuBtn.classList.remove('open');
+            mobileNav.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenuBtn.classList.remove('open');
+                mobileNav.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // ════ TYPING EFFECT ════
+        const words = ['precision.', 'restraint.', 'relentless.', 'immortal.'];
+        let wordIdx = 0, charIdx = 0, isDeleting = false;
+        function typeLoop() {
+            const current = words[wordIdx];
+            if (!isDeleting) {
+                typedTextEl.textContent = current.substring(0, charIdx + 1);
+                charIdx++;
+                if (charIdx === current.length) {
+                    isDeleting = true;
+                    setTimeout(typeLoop, 2200);
+                    return;
+                }
+                setTimeout(typeLoop, 90);
+            } else {
+                typedTextEl.textContent = current.substring(0, charIdx - 1);
+                charIdx--;
+                if (charIdx === 0) {
+                    isDeleting = false;
+                    wordIdx = (wordIdx + 1) % words.length;
+                    setTimeout(typeLoop, 300);
+                    return;
+                }
+                setTimeout(typeLoop, 50);
+            }
+        }
+        setTimeout(typeLoop, PRELOADER_DURATION + 600);
+
+        // ════ MOUSE PARALLAX — Hero ════
+        let mouseXh = 0, mouseYh = 0, targetMXh = 0, targetMYh = 0;
+        hero.addEventListener('mousemove', e => {
+            const r = hero.getBoundingClientRect();
+            targetMXh = e.clientX - r.left;
+            targetMYh = e.clientY - r.top;
+        });
+        hero.addEventListener('mouseleave', () => {
+            targetMXh = hero.offsetWidth / 2;
+            targetMYh = hero.offsetHeight / 2;
+        });
+        function parallaxLoop() {
+            mouseXh += (targetMXh - mouseXh) * 0.06;
+            mouseYh += (targetMYh - mouseYh) * 0.06;
+            if (heroCarVisual && window.innerWidth > 768) {
+                const ox = (mouseXh / hero.offsetWidth - 0.5) * 22;
+                const oy = (mouseYh / hero.offsetHeight - 0.5) * 14;
+                heroCarVisual.style.transform = `translate(${ox}px, ${oy}px)`;
+            }
+            requestAnimationFrame(parallaxLoop);
+        }
+        requestAnimationFrame(parallaxLoop);
+
+        // ════ 3D TILT — Model cards ════
+        document.querySelectorAll('[data-tilt]').forEach(card => {
+            card.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left, y = e.clientY - rect.top;
+                const cx = rect.width / 2, cy = rect.height / 2;
+                const rotateX = ((y - cy) / cy) * -6;
+                const rotateY = ((x - cx) / cx) * 6;
+                this.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
+                this.style.transition = 'transform 0.6s ease-out';
+            });
+            card.addEventListener('mouseenter', function() {
+                this.style.transition = 'transform 0.1s ease-out, background 0.5s';
+            });
+        });
+
+        // Heritage card subtle tilt
+        if (aboutGlass) {
+            const heritageSection = document.getElementById('heritageSection');
+            if (heritageSection) {
+                heritageSection.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left, y = e.clientY - rect.top;
+                    const cx = rect.width / 2, cy = rect.height / 2;
+                    const rx = ((y - cy) / cy) * -4;
+                    const ry = ((x - cx) / cx) * 4;
+                    aboutGlass.style.transform = `perspective(1400px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+                });
+                heritageSection.addEventListener('mouseleave', () => {
+                    aboutGlass.style.transform = 'perspective(1400px) rotateX(0deg) rotateY(0deg)';
+                });
+            }
+        }
+
+        // ════ GSAP SCROLLTRIGGER ════
+        gsap.registerPlugin(ScrollTrigger);
+
+        const sectionsToAnimate = document.querySelectorAll('#heritage, #models, #gallery, #configure, #testimonials, #reserve, #footer');
+        sectionsToAnimate.forEach(sec => {
+            gsap.fromTo(sec,
+                { opacity: 0, y: 40 },
+                { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out',
+                  scrollTrigger: { trigger: sec, start: 'top 88%', toggleActions: 'play none none none' } }
+            );
+        });
+
+        gsap.fromTo('.model-card',
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out',
+              scrollTrigger: { trigger: '#models', start: 'top 78%' } }
+        );
+        gsap.fromTo('.gallery-card',
+            { opacity: 0, scale: 0.97 },
+            { opacity: 1, scale: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out',
+              scrollTrigger: { trigger: '#gallery', start: 'top 80%' } }
+        );
+        gsap.fromTo('.config-card',
+            { opacity: 0, y: 24 },
+            { opacity: 1, y: 0, duration: 0.75, stagger: 0.15, ease: 'power3.out',
+              scrollTrigger: { trigger: '#configure', start: 'top 80%' } }
+        );
+        gsap.fromTo('.h-stat',
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out',
+              scrollTrigger: { trigger: '#heritage', start: 'top 70%' } }
+        );
+
+        // ════ TESTIMONIAL CAROUSEL ════
+        const tCards     = testimonialCarousel.querySelectorAll('.testimonial-card');
+        let currentSlide = 0;
+        const totalSlides = tCards.length;
+
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Slide ${i + 1}`);
+            dot.addEventListener('click', () => goToSlide(i));
+            testimonialDots.appendChild(dot);
+        }
+        const dots = testimonialDots.querySelectorAll('.testimonial-dot');
+
+        function goToSlide(idx) {
+            currentSlide = idx;
+            const card = tCards[idx];
+            const carouselWidth = testimonialCarousel.offsetWidth;
+            const scrollTarget  = card.offsetLeft - (carouselWidth - card.offsetWidth) / 2;
+            testimonialCarousel.scrollTo({ left: scrollTarget, behavior: 'smooth' });
+            dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        }
+
+        function autoAdvance() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+        }
+        let autoTimer = setInterval(autoAdvance, 4500);
+
+        testimonialCarousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
+        testimonialCarousel.addEventListener('mouseleave', () => { autoTimer = setInterval(autoAdvance, 4500); });
+
+        testimonialCarousel.addEventListener('scroll', () => {
+            const scrollLeft    = testimonialCarousel.scrollLeft;
+            const carouselWidth = testimonialCarousel.offsetWidth;
+            let minDist = Infinity, newIdx = 0;
+            tCards.forEach((card, i) => {
+                const cardCenter    = card.offsetLeft + card.offsetWidth / 2;
+                const carouselCenter = scrollLeft + carouselWidth / 2;
+                const dist = Math.abs(cardCenter - carouselCenter);
+                if (dist < minDist) { minDist = dist; newIdx = i; }
+            });
+            if (newIdx !== currentSlide) {
+                currentSlide = newIdx;
+                dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+            }
+        });
+
+        testimonialCarousel.addEventListener('wheel', function(e) {
+            const { deltaX, deltaY } = e;
+            if (Math.abs(deltaY) > Math.abs(deltaX)) return;
+            e.preventDefault();
+            testimonialCarousel.scrollLeft += deltaX + deltaY;
+        }, { passive: false });
+
+        // ════ CONTACT / RESERVE FORM ════
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('.btn-submit');
+            btn.textContent = '✓ Reservation Received';
+            btn.style.background = 'linear-gradient(90deg, #1a5a3a, #22773a)';
+            setTimeout(() => {
+                btn.textContent = 'Submit Reservation';
+                btn.style.background = '';
+                this.reset();
+            }, 3000);
+        });
+
+        // ════ SMOOTH SCROLL ════
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    const navH = siteNav ? siteNav.offsetHeight : 72;
+                    const top  = target.getBoundingClientRect().top + window.scrollY - navH;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+
+        console.log('%c VELOX AUTOMOBILES — System Online ', 'background:#C9A84C;color:#080808;font-weight:bold;padding:4px 10px;');
+    })();
+    </script>
+</body>
+</html>
